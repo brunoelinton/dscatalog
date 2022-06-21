@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import com.brunoelinton.dscatalog.entities.Product;
-import com.brunoelinton.dscatalog.services.exceptions.ResourceNotFoundException;
 import com.brunoelinton.dscatalog.tests.Factory;
 
 @DataJpaTest
@@ -68,7 +67,7 @@ public class ProductRepositoryTests {
 
 	@Test
 	public void findByIdShouldReturnEmptyOptionalWhenIdDoesNotExist() {
-		// ACT
+		// ACT 
 		Optional<Product> product = repository.findById(existingId);
 		// ASSERTION
 		Assertions.assertTrue(product.isPresent());
