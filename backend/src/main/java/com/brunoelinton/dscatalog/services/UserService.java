@@ -90,5 +90,4 @@ public class UserService {
 			entity.getRoles().add(role);
 		}
 	}
-
 }
