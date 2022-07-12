@@ -13,7 +13,7 @@
 	<artifactId>dscatalog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dscatalog</name>
-	<description>DSCatalog - Product Calog</description>
+	<description>DSCatalog - Product Catalog</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
