@@ -67,6 +67,10 @@ public class Category implements Serializable {
 		return createdAt;
 	}
 
+	public Set<Product> getProducts() {
+		return products;
+	}
+	
 	@PrePersist
 	public void prePersist() {
 		createdAt = Instant.now();
@@ -75,10 +79,6 @@ public class Category implements Serializable {
 	@PreUpdate
 	public void preUpdate() {
 		updatedAt = Instant.now();
-	}
-
-	public Set<Product> getProducts() {
-		return products;
 	}
 	
 	@Override
