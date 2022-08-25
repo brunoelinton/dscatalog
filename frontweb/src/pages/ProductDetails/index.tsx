@@ -1,19 +1,28 @@
 import { ReactComponent as ArrowIcon } from 'assets/images/arrow.svg';
-import { Product } from 'assets/types/product';
+import { Product } from 'types/product';
 import axios from 'axios';
 import ProductPrice from 'components/ProductPrice';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { BASE_URL } from 'util/requests';
 import './styles.css';
 
+type UrlParams = {
+  productId: string;
+}
+
 const ProductDetails = () => {
   
-  let product : Product;
+  const { productId } = useParams<UrlParams>();
+  const [product, setProduct] = useState<Product>();
 
-  axios.get(BASE_URL + "/products/2")
+  useEffect(() => {
+    axios.get(`${BASE_URL}/products/${productId}`)
     .then(response => {
-      console.log(response.data)
+      setProduct(response.data);
     });
+  }, [productId])
+
 
   
   return (
@@ -29,23 +38,20 @@ const ProductDetails = () => {
           <div className="col-xl-6">
             <div className="img-container">
               <img
-                src="https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/2-big.jpg"
-                alt="Nome do produto"
+                src={product?.imgUrl}
+                alt={product?.name}
               />
             </div>
             <div className="name-price-container">
-              <h1>Nome do produto</h1>
-              <ProductPrice price={2345.67} />
+              <h1>{product?.name}</h1>
+              {product && <ProductPrice price={product?.price} />}
             </div>
           </div>
           <div className="col-xl-6">
             <div className="description-container">
               <h2>Descrição do produto</h2>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Commodi, tempore sit explicabo officiis at modi fugiat quia non
-                totam voluptatibus tenetur magnam deleniti temporibus accusamus
-                quam in quos, ducimus enim.
+                {product?.description}
               </p>
             </div>
           </div>
